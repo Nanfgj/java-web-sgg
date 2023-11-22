@@ -1,7 +1,5 @@
 <script setup>
-
 import {ref, reactive} from 'vue'
-
 // 响应式数据,保存用户输入的表单信息
 let loginUser = reactive({
   username: '',
@@ -29,9 +27,9 @@ function checkUsername() {
 // 校验密码的方法
 function checkUserPwd() {
   // 定义正则
-  var userPwdReg = /^[0-9]{6}$/
+  var passwordReg = /^[0-9]{6}$/
   // 校验密码
-  if (!userPwdReg.test(loginUser.userPwd)) {
+  if (!passwordReg.test(loginUser.userPwd)) {
     // 格式不合法
     userPwdMsg.value = "格式有误"
     return false
@@ -39,32 +37,31 @@ function checkUserPwd() {
   userPwdMsg.value = "ok"
   return true
 }
-
 </script>
 
-
 <template>
-
   <div>
     <h3 class="ht">请登录</h3>
     <table class="tab" cellspacing="0px">
       <tr class="ltr">
         <td>请输入账号</td>
         <td>
-          <input class="ipt" type="text" v-model="loginUser.username" @blur="checkUsername()">
-
+          <input class="ipt"
+                 type="text"
+                 v-model="loginUser.username"
+                 @blur="checkUsername()">
           <span id="usernameMsg" v-text="usernameMsg"></span>
         </td>
       </tr>
-
       <tr class="ltr">
         <td>请输入密码</td>
         <td>
-          <input class="ipt" type="password" v-model="loginUser.userPwd" @blur="checkUserPwd()">
-
+          <input class="ipt"
+                 type="password"
+                 v-model="loginUser.userPwd"
+                 @blur="checkUserPwd()">
           <span id="userPwdMsg" v-text="userPwdMsg"></span>
         </td>
-
       </tr>
       <tr class="ltr">
         <td colspan="2" class="buttonContainer">
@@ -75,14 +72,11 @@ function checkUserPwd() {
           </router-link>
         </td>
       </tr>
-
     </table>
   </div>
-
 </template>
 
 <style scoped>
-
 .ht {
   text-align: center;
   color: cadetblue;
@@ -120,5 +114,4 @@ function checkUserPwd() {
 .buttonContainer {
   text-align: center;
 }
-
 </style>

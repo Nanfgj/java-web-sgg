@@ -1,8 +1,9 @@
-import {createRouter, createWebHashHistory} from "vue-router"
+import {createRouter, createWebHashHistory} from 'vue-router'
 
-import Login from "../components/Login.vue";
-import Regist from "../components/Regist.vue";
-import ShowSchedule from "../components/ShowSchedule.vue";
+
+import Login from '../components/Login.vue'
+import Regist from '../components/Regist.vue'
+import ShowScedule from '../components/ShowSchedule.vue'
 
 let router = createRouter({
     history: createWebHashHistory(),
@@ -17,12 +18,14 @@ let router = createRouter({
         },
         {
             path: "/showSchedule",
-            component: ShowSchedule
+            component: ShowScedule
         },
         {
             path: "/regist",
             component: Regist
         }
+
+
     ]
 })
 

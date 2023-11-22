@@ -1,16 +1,16 @@
 <script setup>
-  import Header from "./components/Header.vue";
+
+import Header from './components/Header.vue'
 </script>
 
 <template>
-
   <div>
-    <header></header>
+    <Header></Header>
     <hr>
-<!--    用于路由切换视图使用-->
+    <!-- 用于路由切换视图使用 -->
     <router-view></router-view>
+
   </div>
-  
 </template>
 
 <style scoped>

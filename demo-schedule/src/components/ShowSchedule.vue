@@ -1,12 +1,11 @@
 <script setup>
+
 </script>
 
-
 <template>
-
   <div>
     <h3 class="ht">您的日程如下</h3>
-    <table class="tab" cellpadding="0px">
+    <table class="tab" cellspacing="0px">
       <tr class="ltr">
         <th>编号</th>
         <th>内容</th>
@@ -26,10 +25,10 @@
         <td colspan="4">
           <button class="btn1">新增日程</button>
         </td>
+
       </tr>
     </table>
   </div>
-
 </template>
 
 <style scoped>
@@ -50,11 +49,13 @@
 
 .ltr td {
   border: 1px solid powderblue;
+
 }
 
 .ipt {
   border: 0px;
   width: 50%;
+
 }
 
 .btn1 {
@@ -62,6 +63,7 @@
   border-radius: 4px;
   width: 100px;
   background-color: antiquewhite;
+
 }
 
 #usernameMsg, #userPwdMsg {
@@ -71,6 +73,5 @@
 .buttonContainer {
   text-align: center;
 }
-
 
 </style>

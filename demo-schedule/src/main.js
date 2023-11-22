@@ -1,0 +1,12 @@
+import {createApp} from 'vue'
+
+import App from './App.vue'
+
+// 导入路由
+import router from "./routers/router.js";
+
+let app = createApp(App)
+
+app.use(router)
+
+app.mount('#app')

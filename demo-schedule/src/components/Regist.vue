@@ -2,6 +2,7 @@
 import {ref, reactive} from 'vue'
 // 导入自定义axios
 import request from '../utils/request.js'
+import router from "../routers/router.js";
 
 // 响应式数据,保存用户输入的表单信息
 let registUser = reactive({
@@ -28,7 +29,7 @@ async function checkUsername() {
 
   // 继续校验用户名是否存在
   let {data} = await request.post(`user/checkUsernameUsed?username=${registUser.username}`)
-  if (data.code != 200){
+  if (data.code != 200) {
     usernameMsg.value = "用户名已被占用"
     return false
   }
@@ -79,6 +80,37 @@ function checkReUserPwd() {
   reUserPwdMsg.value = "OK"
   return true
 }
+
+// 注册的方法
+async function regist() {
+  // 检测所有输入框是否合法
+  let flag1 = await checkUsername()
+  let flag2 = await checkUserPwd()
+  let flag3 = await checkReUserPwd()
+  if (flag1 && flag2 && flag3) {
+    let {data} = await request.post("user/regist", registUser)
+    if (data.code == 200) {
+      // 注册成功跳转 登录页
+      alert("注册成功,快去登录吧")
+      router.push("/login")
+    } else {
+      alert("抱歉,用户名被抢注了")
+    }
+  } else {
+    alert("校验不通过,请再次检查数据")
+  }
+
+}
+
+function clearForm() {
+  registUser.username = ""
+  registUser.userPwd = ""
+  usernameMsg.value = ""
+  userPwdMsg.value = ""
+  reUserPwd.value = ""
+  reUserPwdMsg.value = ""
+}
+
 </script>
 
 <template>
@@ -124,8 +156,8 @@ function checkReUserPwd() {
       </tr>
       <tr class="ltr">
         <td colspan="2" class="buttonContainer">
-          <input class="btn1" type="button" value="注册">
-          <input class="btn1" type="button" value="重置">
+          <input class="btn1" type="button" @click="regist()" value="注册">
+          <input class="btn1" type="button" @click="clearForm()" value="重置">
           <router-link to="/login">
             <button class="btn1">去登录</button>
           </router-link>

@@ -1,5 +1,7 @@
 <script setup>
 import {ref, reactive} from 'vue'
+import request from "../utils/request.js"
+import router from "../routers/router.js";
 // 响应式数据,保存用户输入的表单信息
 let loginUser = reactive({
   username: '',
@@ -37,6 +39,36 @@ function checkUserPwd() {
   userPwdMsg.value = "ok"
   return true
 }
+
+// 登录
+async function login() {
+  // 表单数据格式都正确再提交
+  let flag1 = checkUsername()
+  let flag2 = checkUserPwd()
+  if (!(flag1 && flag2)) {
+    return
+  }
+  let {data} = await request.post("user/login", loginUser)
+  if (data.code == 200) {
+    alert("登录成功")
+    // 跳转到showSchedule
+    router.push("/showSchedule")
+  } else if (data.code == 503) {
+    alert("密码错误")
+  } else if (data.code == 501) {
+    alert("用户名有误")
+  } else {
+    alert("未知错误")
+  }
+}
+
+function clearForm(){
+  loginUser.username = ""
+  loginUser.userPwd = ""
+  usernameMsg.value = ""
+  userPwdMsg.value = ""
+}
+
 </script>
 
 <template>
@@ -65,8 +97,8 @@ function checkUserPwd() {
       </tr>
       <tr class="ltr">
         <td colspan="2" class="buttonContainer">
-          <input class="btn1" type="button" value="登录">
-          <input class="btn1" type="button" value="重置">
+          <input class="btn1" type="button" @click="login()" value="登录">
+          <input class="btn1" type="button" @click="clearForm()" value="重置">
           <router-link to="/regist">
             <button class="btn1">去注册</button>
           </router-link>
